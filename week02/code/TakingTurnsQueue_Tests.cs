@@ -11,7 +11,9 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Assert.AreEqual failed. Expected:<Bob>. Actual:<Sue>. line 37 below   Upon review of the code fo the PersonQueue class, my hypothesis is that the .Add() should be used
+    // rather than .Insert() method.  This is becuase with Insert, the Enqueue method in the PersonQueue class is putting the last in at index 0.  Dequeue method in the PersonQueue class is
+    // pulling from the 0 index.  Plan to update the PersonQueue Enqueue method to use Add rather than Insert.  After this update, the test passed.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -43,7 +45,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: 
+    // Defect(s) Found: This test passed after making the update to fix for the first test.  Hypothesis, the same error was for this test method as well.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -85,7 +87,10 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found:  Assert.AreEqual failed. Expected:<Tim>. Actual:<Sue>.  The new item is that Tim has turns set to 0.  The hypothesis is that there is some logic error 
+    // upon review of the code for TakingTurnsQueue and the method of GetNextPerson it looks like there is no logic to check for the case that turns <= 0.  If turns is positive and >1, then 
+    // each GetNextPerson will Enqueue the person.  Note that when turns == 1, the logic will not Enqueue the person and they are done.  So just need to add logic to cover the case when turns <=0
+    // Adding this if statement resulted in the test passed.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -116,7 +121,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Test passed becuase in this case turns is < 0 and I included that in the logic code I added.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -143,7 +148,7 @@ public class TakingTurnsQueueTests
     [TestMethod]
     // Scenario: Try to get the next person from an empty queue
     // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: 
+    // Defect(s) Found: This test passed so the exception was detected and thrown correctly.
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
