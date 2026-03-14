@@ -1,6 +1,9 @@
-﻿public class DuplicateCounter
+﻿using System.Runtime.CompilerServices;
+
+public class DuplicateCounter
 {
-    //Count how many duplicates are in a collection of data.
+    //Count how many duplicates are in a collection of data.  A duplicate is defined as the instance of a value that already is in the set.  So if there are three 1 values in 
+    // the set, then there are 2 duplicates.
 
     public static void Run()
     {
@@ -24,7 +27,12 @@
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        int maxValue = data.Max();
+        var setDuplicateCount = new HashSet<int>(maxValue + 1) {};
+        foreach (int item in data)
+        {
+            setDuplicateCount.Add(item);
+        }
+        return data.Length - setDuplicateCount.Count();
     }
 }

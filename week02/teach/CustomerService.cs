@@ -11,7 +11,7 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
+        // Scenario: Test correctly sets the default value of 10 for any <= 0
         // Expected Result: 
         Console.WriteLine("Test 1");
 

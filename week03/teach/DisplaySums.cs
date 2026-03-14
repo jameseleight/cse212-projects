@@ -26,7 +26,7 @@
     /// 10 using a set in O(n) time.  We are assuming that there are no duplicates
     /// in the list.
     /// </summary>
-    /// <param name="numbers">array of integers</param>
+    // <param name="numbers">array of integers</param>
     private static void DisplaySumPairs(int[] numbers) {
         // TODO Problem 2 - This should print pairs of numbers in the given array
     }
