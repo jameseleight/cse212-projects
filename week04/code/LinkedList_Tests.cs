@@ -232,3 +232,27 @@ public class ReverseTests
         Assert.AreEqual("<IEnumerable>{2, 2, 3, 4, 2, 5}", ll.Reverse().AsString());
     }
 }
+// [TestClass]
+// public class LoopTests
+// {
+//     [TestMethod]
+//     public void Iterate_Forward()
+//     {
+//         var ll = new LinkedList();
+//         ll.InsertHead(2);
+//         ll.InsertHead(7);
+//         ll.InsertHead(3);
+//         ll.InsertHead(4);
+//         ll.InsertHead(8);
+//         ll.InsertHead(5);
+//         foreach (var item in ll)
+//             {
+//                 Console.WriteLine(item);
+//             }
+//         Console.WriteLine();
+//         foreach(var item in ll.Reverse())
+//         {
+//             Console.WriteLine(item);
+//         }
+//     }
+// }

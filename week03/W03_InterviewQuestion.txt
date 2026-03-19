@@ -1,0 +1,13 @@
+Assume there are two sets of values A and B.  The can be provided as delimited text in a file or a string or can be provided as an array [] or as a hashset.  For the purpose of this question I will assume that they are each in an array.
+
+Intersection
+To find the Intersection of the two sets A and B, I would declare a new empty Hashset C for the intersection and a new Hashset D to and load the array A into that set.  Loading an array A into a HashSet D is a O(n) performance task.
+Next I would loop through the set B and for each item in B I would determine if it was a member of C.  If so, then I would add that item to D.  The loop is a O(n) performance operation and the member check and add are both O(1) operations.
+The resulting set D is the intersection.  The code should not care if the count of A and B are unequal, since any say extra items in A and not in B are not part of the intersection.  Also, the order of the two sets being processed in the initial load or the for loop should not matter also.
+The big O performance is O(n) since there are the two loops to load A and then to check B and all the other operations are O(1) so the result is a O(n) performance for the code.
+Some tests include 1. to check a case where A.count > B.count and also B.count > A.count. 2. to check a case where the intesection is null or C.count = 0.  3. to check a case where A and B have the same count, but some in common, all in common, or none in common.
+
+Union
+To find the union of the two sets A and B, I would declare a new HashSet C with an initial load of A, then I would implement a loop to load all the items of B into C.  By definition of a HashSet, loading duplicates will not change the set.  The result would be the union of the two sets.
+The big O performance is O(n) since loading a new HashSet is O(n) and the loop is O(n).  There are no other operations for the union.
+Some tests include 1. A.count > B.count, B.count > A.count where the smaller count set is by defintion a subset of the larger set.  2.  Any size for A and B where the items in each set are not common and the union is the sum of the two sets.  3.  A or B is emtpy (null) 4. A = B then = C
