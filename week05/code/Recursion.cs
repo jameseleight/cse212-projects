@@ -18,10 +18,6 @@ public static class Recursion
         {
             return 0;
         }
-        else if (n == 1)
-        {
-            return 1;
-        }
         else
         {
             return n*n + SumSquaresRecursive(n-1);
@@ -51,7 +47,7 @@ public static class Recursion
     // note that "" is the default for word if no value included in the method call
     // note that "size" is equivalent to "choose" and I would use that as the variable name to match the mathematical definition
     {
-        if (letters.Length == 0 || size == 0)
+        if (size == 0)  // this is the only base case condition becuase by definition of the problem size in 1-length
         {
             // add whatever is in the variable word to the varaible list of results if there are no more char in letters available
             // to choose to add to the permutation OR the number of letters to choose is 0
@@ -171,9 +167,10 @@ public static class Recursion
         // determien where is the first '*' in the string
         int indexLocation = pattern.IndexOf('*');
         // convert to char array and set index location value to '0' and recurse with new pattern
-        char[] patternChar0 = pattern.ToCharArray();
-        patternChar0[indexLocation] = '0';
-        string patternNew0 = new string(patternChar0);
+        // char[] patternChar0 = pattern.ToCharArray();
+        // patternChar0[indexLocation] = '0';
+        // string patternNew0 = new string(patternChar0);
+        string patternNew0 = pattern[..indexLocation] + "0" + pattern[(indexLocation+1)..];
         WildcardBinary(patternNew0, results);
 
         char[] patternChar1 = pattern.ToCharArray();
