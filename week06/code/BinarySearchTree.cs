@@ -11,7 +11,7 @@ public class BinarySearchTree : IEnumerable<int>
     {
         // Create new node
         Node newNode = new(value);
-        // If the list is empty, then point both head and tail to the new node.
+        // If the tree is empty, then point both head and tail to the new node.
         if (_root is null)
         {
             _root = newNode;
@@ -80,7 +80,12 @@ public class BinarySearchTree : IEnumerable<int>
 
     private void TraverseBackward(Node? node, List<int> values)
     {
-        // TODO Problem 3
+        if (node is not null)
+        {
+            TraverseBackward(node.Right, values);
+            values.Add(node.Data);
+            TraverseBackward(node.Left, values);
+        }
     }
 
     /// <summary>
@@ -90,7 +95,7 @@ public class BinarySearchTree : IEnumerable<int>
     {
         if (_root is null)
             return 0;
-        return _root.GetHeight();
+        return _root.GetHeight();  // get the height from root node
     }
 
     public override string ToString()
