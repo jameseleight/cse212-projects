@@ -50,7 +50,7 @@ public static class Trees
     /// <param name="first">the first index in the sortedNumbers to insert</param>
     /// <param name="last">the last index in the sortedNumbers to insert</param>
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
-    private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
+       private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // if first == last, this is the base case where you insert the single value left in sortedNumbers into bst and return
         // note that the index of the middle of the array is = floor((last-first)/2) = 0
@@ -59,21 +59,18 @@ public static class Trees
             bst.Insert(sortedNumbers[first]);
             return;
         }
-        // find the index of the item to add to the tree.  want the "middle" index which is floor((last-first)/2)
-        int middleIndex = Convert.ToInt32(Math.Floor(Convert.ToDecimal(last - first)/2));
+        // find the index of the item to add to the tree.  want the "middle" index which is the ave rounded down =  floor((last+first)/2)
+        int middleIndex = Convert.ToInt32(Math.Floor(Convert.ToDecimal(last + first)/2));
         // insert the value for this index
         bst.Insert(sortedNumbers[middleIndex]);
-        // since middleIndex is the floor, it is only == last if first == last 
-        int[] sortedNumbersNew = new int[0];
+        // since middleIndex is the floor, it is only == last if first == last and that is covered above in the base case
         if (middleIndex != first)
         {
             // insert from the middle of the remaining left side of the array.  recursive call until the base case
-            sortedNumbersNew = sortedNumbers[..middleIndex];
-            InsertMiddle(sortedNumbersNew,0,sortedNumbersNew.Length - 1, bst); // .. excludes end so middleIndex is excluded 
+            InsertMiddle(sortedNumbers,first,middleIndex - 1, bst); 
         }
         // if middleIndex == first, then there is no left side
-        // insert from the middle of the remaining right side of the array.  recursive call unitl middle + 1 equals last
-        sortedNumbersNew = sortedNumbers[(middleIndex + 1)..]; // .. excludes end so middleIndex is excluded
-        InsertMiddle(sortedNumbersNew,0,sortedNumbersNew.Length - 1, bst);
+        // insert from the middle of the remaining right side of the array.  recursive call until middle + 1 equals last
+        InsertMiddle(sortedNumbers,middleIndex + 1,last, bst);
     }
 }
